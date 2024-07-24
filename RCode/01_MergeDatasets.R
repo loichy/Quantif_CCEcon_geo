@@ -268,6 +268,4 @@ df_final_merged <- df_final_join %>%
   left_join(select(df_long_temperature,ISO3,year,TemperatureValues),by = c("ISO3","year"))%>% 
 left_join(select(df_long_trade,ISO3,year,Comparative_advantage,Total_trade,Trade_balance),by = c("ISO3","year"))
 
-write.csv(df_final_merged, file = "/Users/manoneluard/Downloads/df_Final_merged.csv", row.names = FALSE)
-
-
+write.csv(df_final_merged, here(dir$prep_data,"df_final_merged.csv"), row.names = FALSE)

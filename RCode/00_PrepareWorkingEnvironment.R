@@ -6,9 +6,7 @@
 
 # Install and load packages
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load(tidyverse, dplyr, readr, sp, raster, sf, here, tmap, rvest, ggplot2, 
-               archive, snow, foreach, doParallel, furrr, purrr, tictoc, RCurl,
-               rnaturalearth, rnaturalearthdata)
+pacman::p_load(tidyverse, dplyr, readr, here, ggplot2, furrr, purrr, tictoc)
 
 # Then: names of other folders in the R project folder
 dir <- list()
