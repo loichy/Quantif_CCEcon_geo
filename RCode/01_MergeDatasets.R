@@ -104,7 +104,7 @@ df_long_Expenditures <- df_long_Expenditures%>%
 df_long_Expenditures <- df_long_Expenditures%>%
   select(!CTS.Name)
 
-df_long_Expenditures <- df_long_Expenditures%>%
+df_long_Expenditures <- df_long_Expenditures%>% # Keep expenditures on environmental protection
   filter(Indicator %in% "Expenditure on environment protection")
 
 df_long_Expenditures <- df_long_Expenditures%>%
