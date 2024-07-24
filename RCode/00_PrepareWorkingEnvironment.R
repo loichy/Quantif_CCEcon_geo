@@ -6,11 +6,11 @@
 
 # Install and load packages
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load(tidyverse, dplyr, readr, sp, raster, sf, here, tmap, rvest, ggplot2, 
-               archive, snow, foreach, doParallel, furrr, purrr, tictoc, RCurl,
-               rnaturalearth, rnaturalearthdata)
+pacman::p_load(tidyverse, dplyr, readr, here, ggplot2, furrr, purrr, tictoc)
 
 # Then: names of other folders in the R project folder
+dir <- list()
+dir$root <- getwd()
 dir$raw_data <- paste0(dir$root, "/Raw_Data") 
 dir$prep_data <- paste0(dir$root, "/Prepared_Data")
 dir$rcode <- paste0(dir$root, "/RCode")

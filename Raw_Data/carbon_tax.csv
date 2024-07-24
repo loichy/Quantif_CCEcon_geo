@@ -1,0 +1,197 @@
+﻿Unique ID;Instrument name;Type;Status;Country;Share of jurisdiction emissions covered;Price on 1 April;2024;Change;Government revenue;2023;Change
+Tax_FI;Finland carbon tax;National Carbon tax;Implemented in 1990;Finland;45% of jurisdiction emissions, 0.05% of global emissions;€93.02 (US$99.99)*;93,01782775;0,208023737;€1,305 million (US$1,419 million);1304,5;0,004910929
+Tax_PL;Poland carbon tax;National Carbon tax;Implemented in 1990;Poland;24% of jurisdiction emissions, 0.18% of global emissions;Not available*;;0,133333333;PLZ5 million (US$1 million);5,4;0,198479236
+Tax_NO;Norway carbon tax;National Carbon tax;Implemented in 1991;Norway;65% of jurisdiction emissions, 0.08% of global emissions;NOK1,174 (US$107.78)*;1174;0,896607431;NOK15,799 million (US$1,508 million);15799;0,120575927
+Tax_SE;Sweden carbon tax;National Carbon tax;Implemented in 1991;Sweden;40% of jurisdiction emissions, 0.05% of global emissions;SEK1,368.30 (US$127.26)*;1368,300514;0,189393939;kr22,500 million (US$2,173 million);22500;-0,054621849
+Tax_DK;Denmark carbon tax;National Carbon tax;Implemented in 1992;Denmark;48% of jurisdiction emissions, 0.04% of global emissions;DKR195.70 (US$28.21);195,7;0,116371934;DKR3,282 million (US$479 million);3282,1;-0,090831025
+Tax_LT;Latvia carbon tax;National Carbon tax;Implemented in 2004;Latvia;2% of jurisdiction emissions, 0.0004% of global emissions;€15 (US$16.12);15;2,333333333;€8 million (US$8 million);7,56;-0,063242192
+Tax_SL;Slovenia Carbon tax;National Carbon tax;Implemented in 1996;Slovenia;45.7% of jurisdiction emissions, 0.02% of global emissions;€17.30 (US$18.60);17,3;0;€83 million (US$91 million);83,317;0,126687359
+Tax_EE;Estonia carbon tax;National Carbon tax;Implemented in 2000;Estonia;10% of jurisdiction emissions, 0.0026% of global emissions;€2 (US$2.15);2;0;€2 million (US$2 million);1,575;-0,372759857
+ETS_EU;EU ETS;Regional ETS;Implemented in 2005;EU;38% of jurisdiction emissions, 0.05% of global emissions;€57.03 (US$61.30);57,03;1,614855571;€43,558 million (US$47,369 million);43558,10422;2,068798204
+ETS_CA_Alberta;Alberta TIER;Subnational - State/Province ETS;Implemented in 2007;Alberta;;CAN$80 (US$58.95);80;1,666666667;CAN$864 million (US$638 million);864;0,902036324
+ETS_CH;Switzerland ETS;National ETS;Implemented in 2008;Switzerland;12% of jurisdiction emissions, 0.01% of global emissions;€55.05 (US$59.17);55,05;7x;Sfr36 million (US$39 million);35,918551;7x
+ETS_NZ;New Zealand ETS;National ETS;Implemented in 2008;New Zealand;48% of jurisdiction emissions, 0.07% of global emissions;NZ$59 (US$35.11);59;1,295719844;NZ$35 million (US$22 million);34,719595;65x
+Tax_CH;Switzerland carbon tax;National Carbon tax;Implemented in 2008;Switzerland;35% of jurisdiction emissions, 0.03% of global emissions;Sfr120 (US$132.12);120;0,25;Sfr1,070 million (US$1,166 million);1070;-0,087030717
+Tax_CA_BC;BC carbon tax;Subnational - State/Province Carbon tax;Implemented in 2008;British Columbia;80% of jurisdiction emissions, 0.09% of global emissions;CAN$80 (US$58.95);80;1;CAN$2,650 million (US$1,958 million);2650;0,881100266
+ETS_RGGI;RGGI;Subnational - State/Province ETS;Implemented in 2009;RGGI;;US$17.64 (US$17.64);17,64;3x;US$1,265 million (US$1,265 million);1264,941115;4x
+Tax_IS;Iceland carbon tax;National Carbon tax;Implemented in 2010;Iceland;36% of jurisdiction emissions, 0.0032% of global emissions;ISK5,098 (US$36.51)*;5098;0,169897974;ISK7,590 million (US$56 million);7590;0,402957486
+ETS_JP_Tokyo;Tokyo CaT;Subnational - City ETS;Implemented in 2010;Tokyo;18% of jurisdiction emissions, 0.02% of global emissions;JPY5,600 (US$36.92);5600;8x;Not available;Not available;
+Tax_IE;Ireland carbon tax;National Carbon tax;Implemented in 2010;Ireland;34% of jurisdiction emissions, 0.04% of global emissions;€56 (US$60.19);56;1,8;€935 million (US$1,017 million);935;1,149425287
+ETS_JP_Saitama;Saitama ETS;Subnational - City ETS;Implemented in 2011;Saitama;18% of jurisdiction emissions, 0.01% of global emissions;JPY144 (US$0.95);144;-0,778461538;Not available;Not available;
+ETS_US_California;California CaT;Subnational - State/Province ETS;Implemented in 2012;California;76% of jurisdiction emissions, 0.56% of global emissions;US$38.59 (US$38.59);38,59;1,447051363;US$4,721 million (US$4,721 million);4720,559638;0,563099218
+Tax_JP;Japan carbon tax;National Carbon tax;Implemented in 2012;Japan;80% of jurisdiction emissions, 1.76% of global emissions;JPY289 (US$1.91);289;0;JPY223,333 million (US$1,673 million);223333;-0,148558902
+ETS_CA_Quebec;Quebec CaT;Subnational - State/Province ETS;Implemented in 2013;Quebec;78.5% of jurisdiction emissions, 0.11% of global emissions;US$38.59 (US$38.59);38,59;1,447051363;CAN$1,419 million (US$1,049 million);1419,345035;1,210817811
+ETS_KZ;Kazakhstan ETS;National ETS;Implemented in 2013;Kazakhstan;47% of jurisdiction emissions, 0.29% of global emissions;KZT473 (US$1.06);473;-0,054;Not available;Not available;
+Tax_UK;UK Carbon Price Support;National Carbon tax;Implemented in 2013;United Kingdom;13% of jurisdiction emissions, 0.1% of global emissions;£18 (US$22.62);18;0;£804 million (US$994 million);803,6;-0,034760479
+ETS_CN_Shenzhen;Shenzhen pilot ETS;Subnational - City ETS;Implemented in 2013;Shenzhen;30% of jurisdiction emissions, 0.03% of global emissions;RMB64.80 (US$8.96);64,8;16x;RMB0 million (US$0 million);0;
+ETS_CN_Shanghai;Shanghai pilot ETS;Subnational - City ETS;Implemented in 2013;Shanghai;36% of jurisdiction emissions, 0.16% of global emissions;RMB72.80 (US$10.06);72,8;0,780821918;RMB192 million (US$28 million);192;14x
+ETS_CN_Beijing;Beijing pilot ETS;Subnational - City ETS;Implemented in 2013;Beijing;24% of jurisdiction emissions, 0.06% of global emissions;RMB105 (US$14.51);105;0,503867087;RMB161 million (US$23 million);160,96;
+ETS_CN_Guangdong;Guangdong pilot ETS;Subnational - State/Province ETS;Implemented in 2013;Guangdong (except Shenzhen);40% of jurisdiction emissions, 0.52% of global emissions;RMB64.68 (US$8.94);64,68;2,3;RMB0 million (US$0 million);0;
+ETS_CN_Tianjin;Tianjin pilot ETS;Subnational - City ETS;Implemented in 2013;Tianjin;35% of jurisdiction emissions, 0.12% of global emissions;RMB34.07 (US$4.71);34,07;1,445800431;RMB0 million (US$0 million);0;
+Tax_FR;France carbon tax;National Carbon tax;Implemented in 2014;France;40% of jurisdiction emissions, 0.32% of global emissions;€44.60 (US$47.94);44,6;0;€7,700 million (US$8,374 million);7700;-0,065987385
+Tax_MX;Mexico carbon tax;National Carbon tax;Implemented in 2014;Mexico;29% of jurisdiction emissions, 0.44% of global emissions;MXN71.33 (US$4.31)*;71,32462526;0,284748823;MXN7,888 million (US$437 million);7887,5;0,341234392
+ETS_CN_Hubei;Hubei pilot ETS;Subnational - State/Province ETS;Implemented in 2014;Hubei;27% of jurisdiction emissions, 0.18% of global emissions;RMB40.65 (US$5.62);40,65;0,467509025;RMB47 million (US$7 million);47;
+ETS_CN_Chongqing;Chongqing pilot ETS;Subnational - City ETS;Implemented in 2014;Chongqing;51% of jurisdiction emissions, 0.18% of global emissions;RMB43.33 (US$5.99);43,33;11x;RMB0 million (US$0 million);0;
+ETS_KR;Korea ETS;National ETS;Implemented in 2015;Korea, Rep.;89% of jurisdiction emissions, 1.2% of global emissions;KRW8,490 (US$6.30);8490;-0,681425891;KRW84,180 million (US$65 million);84180,23;-0,197136576
+Tax_PT;Portugal carbon tax;National Carbon tax;Implemented in 2015;Portugal;40% of jurisdiction emissions, 0.04% of global emissions;Not available*;;0,877677954;€448million (US$495 million) (2022);Not available;2,247826087
+ETS_CA_BC;BC OBPS;Subnational - State/Province ETS;Implemented in 2016;British Columbia;0% of jurisdiction emissions, 0% of global emissions;CAN$80 (US$58.95);80;2,2;Not available;Not available;
+ETS_AU2;Australia Safeguard Mechanism;National ETS;Implemented in 2023;Australia;26% of jurisdiction emissions, 0.28% of global emissions;A$33.75 (US$21.90);33,75;;Not available;Not available;
+Tax_ZA;South Africa carbon tax;National Carbon tax;Implemented in 2019;South Africa;82% of jurisdiction emissions, 0.81% of global emissions;R190 (US$10.09);190;0,496062992;R2,268 million (US$127 million);2268;
+Tax_CL;Chile carbon tax;National Carbon tax;Implemented in 2017;Chile;55% of jurisdiction emissions, 0.14% of global emissions;US$5 (US$5);5;0;CLP171million (US$0 million) (2022);Not available;0,033232628
+Tax_CO;Colombia carbon tax;National Carbon tax;Implemented in 2017;Colombia;20% of jurisdiction emissions, 0.08% of global emissions;COP25,800 (US$6.68);25799,56;0,571036415;COP575,274 million (US$124 million);575274;0,956228555
+Tax_UA;Ukraine carbon tax;National Carbon tax;Implemented in 2011;Ukraine;32% of jurisdiction emissions, 0.12% of global emissions;UAH30 (US$0.77);30;2;UAH3,143 million (US$86 million);3142,5;28x
+Tax_LI;Liechtenstein carbon tax;National Carbon tax;Implemented in 2008;Liechtenstein;72% of jurisdiction emissions, 0.0002% of global emissions;Sfr120 (US$132.12);120;0,25;Sfr5 million (US$5 million);4,55;0,138923655
+ETS_US_Washington;Washington CCA;Subnational - State/Province ETS;Implemented in 2023;Washington;70% of jurisdiction emissions, 0.11% of global emissions;US$25.75 (US$25.75);25,75;0,15990991;US$1,825 million (US$1,825 million);1824,524331;
+ETS_CN_Fujian;Fujian pilot ETS;Subnational - State/Province ETS;Implemented in 2016;Fujian;51% of jurisdiction emissions, 0.28% of global emissions;RMB27.11 (US$3.75);27,11;1,657843137;RMB0 million (US$0 million);0;
+ETS_CA;Canada federal OBPS;National ETS;Implemented in 2019;Canada;1% of jurisdiction emissions, 0.01% of global emissions;CAN$80 (US$58.95);80;1;CAN$130 million (US$96 million);130,4;
+Tax_SG;Singapore carbon tax;National Carbon tax;Implemented in 2019;Singapore;79% of jurisdiction emissions, 0.1% of global emissions;S$25 (US$18.48);25;4x;S$215 million (US$162 million);215,23;
+ETS_CN;China national ETS;National ETS;Implemented in 2021;China;31.8783486211303% of jurisdiction emissions, 9.3% of global emissions;RMB90.97 (US$12.57);90,97;0,555042735;Not available;Not available;
+ETS_MX;Mexico pilot ETS;National ETS;Implemented in 2020;Mexico;40% of jurisdiction emissions, 0.61% of global emissions;Not available;0;;MXN0 million (US$0 million);0;
+ETS_CA_NL;Newfoundland and Labrador PSS;Subnational - State/Province ETS;Implemented in 2019;Newfoundland and Labrador;38% of jurisdiction emissions, 0.01% of global emissions;CAN$80 (US$58.95);80;1,666666667;CAN$0 million (US$0 million);0,1858;
+ETS_US_MA;Massachusetts ETS;Subnational - State/Province ETS;Implemented in 2018;Massachusetts;9% of jurisdiction emissions, 0.01% of global emissions;US$2.25 (US$2.25);2,25;-0,725561796;US$41 million (US$41 million);41,42299035;13x
+Tax_CA_NT;Northwest Territories carbon tax;Subnational - State/Province Carbon tax;Implemented in 2019;Northwest Territories;76% of jurisdiction emissions, 0.0018% of global emissions;CAN$80 (US$58.95);80;3x;CAN$58 million (US$43 million);58;7x
+ETS_CA_NS;Nova Scotia OBPS;Subnational - State/Province ETS;Implemented in 2019;Nova Scotia;87% of jurisdiction emissions, 0.02% of global emissions;CAN$25.72 (US$18.95);25,72;0,041295547;CAN$34 million (US$25 million);34,08795056;
+Tax_CA;Canada federal fuel charge;National Carbon tax;Implemented in 2019;Canada;31% of jurisdiction emissions, 0.44% of global emissions;CAN$80 (US$58.95);80;3x;CAN$7,740 million (US$5,719 million);7740;3x
+Tax_NL;Netherlands carbon tax;National Carbon tax;Implemented in 2021;Netherlands;45% of jurisdiction emissions, 0.14% of global emissions;€66.50 (US$71.48)*;66,5;1,216666667;Not available;Not available;
+Tax_AR;Argentina carbon tax;National Carbon tax;Implemented in 2018;Argentina;38% of jurisdiction emissions, 0.27% of global emissions;ARS695.92 (US$0.81)*;695,9158986;1,626644737;ARS41,290 million (US$198 million);41289,8;205x
+ETS_CA_SK;Saskatchewan OBPS;Subnational - State or Province ETS;Implemented in 2019;Saskatchewan;43% of jurisdiction emissions, 0.05% of global emissions;CAN$80 (US$58.95);80;1;CAN$29 million (US$22 million);29,257;
+Tax_ES;Spain carbon tax;National Carbon tax;Implemented in 2014;Spain;1.9% of jurisdiction emissions, 0.01% of global emissions;€15 (US$16.12);15;0;€95 million (US$103 million);95;-0,136277264
+ETS_CA_NB;New Brunswick OBPS;Subnational - State/Province ETS;Implemented in 2021;New Brunswick;52% of jurisdiction emissions, 0.01% of global emissions;CAN$80 (US$58.95);80;0,6;CAN$0million (US$0 million) (2022);Not available;
+ETS_CA_Ontario2;Ontario EPS;Subnational - State/Province ETS;Implemented in 2022;Ontario;26% of jurisdiction emissions, 0.07% of global emissions;CAN$80 (US$58.95);80;1;Not available;Not available;
+ETS_ID;Indonesia ETS;National ETS;Implemented in 2023;Indonesia;26% of jurisdiction emissions, 0.6% of global emissions;IDR9,754.20 (US$0.61);9754,24;;Not available;Not available;
+ETS_DE;Germany ETS;National ETS;Implemented in 2021;Germany;39% of jurisdiction emissions, 0.57% of global emissions;€45 (US$48.37);45;0,8;€10,740 million (US$11,680 million);10740,11148;0,495039136
+Tax_LU;Luxembourg carbon tax;National Carbon tax;Implemented in 2021;Luxembourg;72% of jurisdiction emissions, 0.01% of global emissions;€46.43 (US$49.91)*;46,43;0,359192037;€271 million (US$295 million);271,19;0,243420449
+ETS_MO;Montenegro ETS;National ETS;Implemented in 2022;Montenegro;42.9411764705882% of jurisdiction emissions, 0.0029% of global emissions;€24 (US$25.80);24;;Not available;9,26;
+ETS_UK;UK ETS;National ETS;Implemented in 2021;United Kingdom;28% of jurisdiction emissions, 0.22% of global emissions;£35.86 (US$45.06);35,86;-0,523961237;£4,203 million (US$5,201 million);4202,870715;-0,024860846
+Tax_MX_ZA;Zacatecas carbon tax;Subnational - State/Province Carbon tax;Implemented in 2017;Zacatecas;50% of jurisdiction emissions, 0.01% of global emissions;MXN250 (US$15.09);250;-1,6499E-10;MXN341 million (US$19 million);340,84;
+ETS_AT;Austria ETS;National ETS;Implemented in 2022;Austria;40.3% of jurisdiction emissions, 0.06% of global emissions;€45 (US$48.37);45;0,384615385;€843 million (US$917 million);843,3;
+Tax_UY;Uruguay CO2 tax;National Carbon tax;Implemented in 2022;Uruguay;4.5% of jurisdiction emissions, 0.0035% of global emissions;YUY6,373 (US$167.17);6373;0,128873695;YUY10,613 million (US$275 million);10613;0,012497615
+Tax_CN_Taiwan;Taiwan carbon fee;Subnational - State/Province Carbon tax;Implemented in 2024;Taiwan, China;80% of jurisdiction emissions, 0.46% of global emissions;RMB66 (US$9.12);66;;Not available;;
+Tax_MX_Queretaro;Queretaro carbon tax;Subnational - State/Province Carbon tax;Implemented in 2022;Queretaro;18% of jurisdiction emissions, 0.01% of global emissions;MXN607.99 (US$36.70);607,99;0,046562468;MXN279 million (US$15 million);279,08;
+Tax_MX_State of Mexico;State of Mexico carbon tax;Subnational - State/Province Carbon tax;Implemented in 2022;State of Mexico;47% of jurisdiction emissions, 0.1% of global emissions;MXN58 (US$3.50);58;0,348837209;MXN85 million (US$5 million);85,008;
+Tax_MX_Yucatan;Yucatan carbon tax;Subnational - State/Province Carbon tax;Implemented in 2022;Yucatan;32.2% of jurisdiction emissions, 0.01% of global emissions;MXN293.14 (US$17.69);293,139;0,046551232;MXN53 million (US$3 million);53,06;
+Tax_MX_Guanajuato;Guanajuato carbon tax;Subnational - State/Province Carbon tax;Implemented in 2023;Guanajuato;42.7% of jurisdiction emissions, 0.03% of global emissions;MXN45 (US$2.72);45;;MXN18 million (US$1 million);18;
+Tax_MX_Durango;Durango carbon tax;Subnational - State/Province Carbon tax;Implemented in 2024;Durango;;MXN100 (US$6.04);100;;Not available;;
+Tax_HU;Hungary Carbon tax;National Carbon tax;Implemented in 2023;Hungary;32.3% of jurisdiction emissions, 0.04% of global emissions;€36 (US$38.70);36;;€106 million (US$115 million);106,1946903;
+Tax_AL;Albania Carbon tax;National Carbon tax;Implemented in 2008;Albania;73% of jurisdiction emissions, 0.01% of global emissions;ALL1,255.20 (US$13.11);1255,23;;Not available;Not available;
+ETS_CL;Chile ETS;National ETS;Under consideration since 2016;Chile;;;;;;;
+ETS_CO;Colombia ETS;National ETS;Under development since 2016;Colombia;;;;;;;
+ETS_JP;Japan ETS;National ETS;Under development since 2016;Japan;;;;;;;
+ETS_TH;Thailand ETS;National ETS;Under consideration since 2016;Thailand;;;;;;;
+ETS_TR;Türkiye ETS;National ETS;Under development since 2016;Türkiye;;;;;;;
+ETS_UA;Ukraine ETS;National ETS;Under development since 2016;Ukraine;;;;;;;
+ETS_US_Oregon;Oregon ETS;Subnational - State/Province ETS;Under development since 2016;Oregon;;;;;;;
+ETS_BR;Brazil ETS;National ETS;Under consideration since 2022;Brazil;;;;;;;
+ETS_CN_Taiwan;Taiwan, China ETS;Subnational - State/Province ETS;Under consideration since 2016;Taiwan, China;;;;;;;
+ETS_VN;Viet Nam ETS;National ETS;Under development since 2017;Viet Nam;;;;;;;
+Tax_CAT;Catalonia Carbon tax;Subnational - State/Province Carbon tax;Under development since 2018;Catalonia;;;;;;;
+Tax_CD;Côte d’Ivoire Carbon tax;National Carbon tax;Under consideration since 2018;Côte d’Ivoire;;;;;;;
+Tax_SEN;Senegal Carbon tax;National Carbon tax;Under consideration since 2019;Senegal;;;;;;;
+ETS_US_PE;Pennsylvania ETS;Subnational - State/Province ETS;Under development since 2019;Pennsylvania;;;;;;;
+ETS_CA_Manitoba;Manitoba ETS;Subnational - State/Province ETS;Under consideration since 2018;Manitoba;;;;;;;
+Tax_CA_Manitoba;Manitoba Carbon tax;Subnational - State/Province Carbon tax;Under consideration since 2018;Manitoba;;;;;;;
+Tax_MX_JA;Jalisco Carbon tax;Subnational - State/Province Carbon tax;Under consideration since 2020;Jalisco;;;;;;;
+Tax_BW;Botswana Carbon tax;National Carbon tax;Under consideration since 2022;Botswana;;;;;;;
+UND_BN;Brunei Darussalam Undecided;National Undecided;Under consideration since 2021;Brunei Darussalam;;;;;;;
+Tax_US_HI;Hawaii Carbon tax;Subnational - State/Province Carbon tax;Under consideration since 2021;Hawaii;;;;;;;
+Tax_IN;Indonesia Carbon tax;National Carbon tax;Under consideration since 2021;Indonesia;;;;;;;
+Tax_IL;Israel Carbon tax;National Carbon tax;Under consideration since 2021;Israel;;;;;;;
+ETS_MY;Malaysia ETS;National ETS;Under consideration since 2021;Malaysia;;;;;;;
+ETS_PK;Pakistan ETS;National ETS;Under consideration since 2021;Pakistan;;;;;;;
+ETS_RU_Sakhalin;Sakhalin ETS;Subnational - State/Province ETS;Under development since 2021;Sakhalin;;;;;;;
+Tax_MA;Morocco Carbon tax;National Carbon tax;Under consideration since 2022;Morocco;;;;;;;
+ETS_GA;Gabon ETS;National ETS;Under consideration since 2022;Gabon;;;;;;;
+ETS_NG;Nigeria ETS;National ETS;Under consideration since 2022;Nigeria;;;;;;;
+ETS_EU2;EU ETS2;Regional ETS;Under development since 2023;EU27+;;;;;;;
+ETS_US_New York State;New York State ETS;Subnational - State/Province ETS;Under development since 2023;New York State;;;;;;;
+ETS_IN;India ETS;National ETS;Under development since 2024;India;;;;;;;
+Tax_NZ;New Zealand Carbon tax;National Carbon tax;Under consideration since 2022;New Zealand;;;;;;;
+Tax_US_HI;Hawaii Carbon tax;Subnational - State/Province Carbon tax;Under consideration since 2021;Hawaii;;;;;;;
+Tax_BW;Botswana Carbon tax;National Carbon tax;Under consideration since 2022;Botswana;;;;;;;
+Tax_CA_Manitoba;Manitoba Carbon tax;Subnational - State/Province Carbon tax;Under consideration since 2018;Manitoba;;;;;;;
+Tax_MX_SLP;San Luis Potosí carbon tax;Subnational - State/Province Carbon tax;Under development since 2024;San Luis Potosí;;;;;;;
+ETS_AR;Argentina  ETS;National ETS;Under consideration since 2024;Argentina ;;;;;;;
+ETS_CA2;Canada ETS;National ETS;Under development since 2024;Canada;;;;;;;
+ETS_US_Colorado;Colorado ETS;Subnational - State/Province ETS;Under development since 2024;Colorado;;;;;;;
+Tax_MX_Colima;Colima Carbon tax;Subnational - State/Province Carbon tax;Under consideration since 2024;Colima;;;;;;;
+ETS_US_Maryland;Maryland ETS;Subnational - State/Province ETS;Under consideration since 2024;Maryland;;;;;;;
+UND_PH;Philippines Undecided;National Undecided;Under consideration since 2024;Philippines;;;;;;;
+Tax_KE;Kenya Carbon tax;National Carbon tax;Under consideration since 2024;Kenya;;;;;;;
+Tax_MR;Mauritania Carbon tax;National Carbon tax;Under consideration since 2024;Mauritania;;;;;;;
+Tax_PY;Paraguay Carbon tax;National Carbon tax;Under consideration since 2024;Paraguay;;;;;;;
+Tax_CA_PE;Prince Edward Island Carbon tax;Subnational - State/Province Carbon tax;Implemented in 2019, Abolished in 2023;Prince Edward Island;;Not available;;;CAN$14 million (US$10 million) in 2023;14;0,489401314
+Tax_CA_NL;Newfoundland and Labrador carbon tax;Subnational - State/Province Carbon tax;Implemented in 2019, Abolished in 2023;Newfoundland and Labrador;;Not available;;;CAN$35 million (US$26 million) in 2023;35;-0,395757353
+Tax_CA_NB;New Brunswick carbon tax;Subnational - State/Province Carbon tax;Implemented in 2020, Abolished in 2023;New Brunswick;;Not available;;;;Not available;0,287208367
+Tax_MX_BC;Baja California carbon tax;Subnational - State/Province Carbon tax;Implemented in 2020, Abolished in 2021;Baja California;;Not available;;;MXN24 million (US$1 million) in 2021;;
+Tax_MX_TA;Tamaulipas carbon tax;Subnational - State/Province Carbon tax;Implemented in 2022, Abolished in 2023;Tamaulipas;;Not available;;;MXN0 million (US$0 million) in 2023;0;-1
+ETS_AU1;Australia CPM;National ETS;Implemented in 2012, Abolished in 2014;Australia;;A$20.72 (US$22.37) in 2014;;;A$3,456 million (US$2,640 million) in 2014;;
+Tax_CA_Alberta;Alberta carbon tax;Subnational - State/Province Carbon tax;Implemented in 2017, Abolished in 2019;Alberta;;Not available;;;;;
+ETS_CA_Ontario;Ontario CaT;Subnational - State/Province ETS;Implemented in 2017, Abolished in 2018;Ontario;;Not available;;;CAN$712 million (US$552 million) in 2018;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
+;;;;;;;;;;;
