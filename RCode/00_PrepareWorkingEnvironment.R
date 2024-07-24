@@ -11,6 +11,8 @@ pacman::p_load(tidyverse, dplyr, readr, sp, raster, sf, here, tmap, rvest, ggplo
                rnaturalearth, rnaturalearthdata)
 
 # Then: names of other folders in the R project folder
+dir <- list()
+dir$root <- getwd()
 dir$raw_data <- paste0(dir$root, "/Raw_Data") 
 dir$prep_data <- paste0(dir$root, "/Prepared_Data")
 dir$rcode <- paste0(dir$root, "/RCode")
