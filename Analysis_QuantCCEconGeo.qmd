@@ -52,6 +52,8 @@ df_final_merged<-read.csv(here(dir$prep_data,"df_final_merged.csv"))
 # Add a variable by 3 regions of the world
 # Add map
 # Use trend instead of year fixed effects
+# Use mega tons of CO2
+# Don't forget comparative advantage in regression tables
 ```
 
 ```{r}
@@ -433,7 +435,7 @@ Coefficients négatifs et significatifs: les émissions de CO2, la hausse des te
 
 ```{r}
 model1<- lm(N_ratio ~ PIB_billion + RDValues + EducFValues + EducHValues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) # modèle sans effet fixe
-vif(mod = model1)
+# vif(mod = model1)vif(mod = model3)
 stargazer(model1, 
           type = "text",
           keep = c("PIB_billion", "RDValues", "EducFValues", "EducHValues", "CO2emissionsalues", "NDC_Implied_average", "is_carbon_tax", "ExpendituresValues", "DisastersValues", "TemperatureValues"))
