@@ -1,0 +1,562 @@
+---
+title: "Geographic analysis of journal articles on climate change economics"
+author: "Manon Eluard and Loic Henry"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    keep_md: true
+---
+
+```{r, include=FALSE}
+# Important note: to run this code, open first the R project "Quantif_CCEcon_geo.Rproj"
+
+##### Clean memory
+rm(list=ls())
+gc()
+
+##### Only required package to initiate is pacman
+# Install and load packages (other packages are install and loaded from "00_PrepareEnvironment.R")
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load(here)
+
+
+#####  Precised relative access to useful Rcodes
+dir <- list() # First create an empty list, that we then fill with subobjects
+dir$root <- getwd() # First: the place of the R project
+dir$rcode <- paste0(dir$root, "/RCode")
+
+##### Prepare working environment
+# Run R scrit "00" which contains all useful package, and creation of all directories
+source(here(dir$rcode, "00_PrepareWorkingEnvironment.R"))
+```
+
+# Introduction
+
+In this analysis, we document the geography of the economics of climate change. In particular, we analyze where and when the economics of climate change has developed as a field. We also bring some explanations to the fact that some countries have provided more analysis on the topic than others.
+
+# Data presentation
+
+# Data exploration
+
+
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+
+Analyse descriptive
+
+```{r}
+df_final_merged<-read.csv(here(dir$prep_data,"df_final_merged.csv"))
+
+# Check Isle of Man
+# Add graph interactifs si intéressant
+# Add a variable by 3 regions of the world
+# Add map
+# Use trend instead of year fixed effects
+# Use mega tons of CO2
+# Don't forget comparative advantage in regression tables
+```
+
+```{r}
+library(corrplot)
+
+# Afficher les noms des variables
+
+names(df_final_merged)
+
+df_final_merged <- df_final_merged %>%
+  mutate(NDC_Implied_average=as.numeric(NDC_Implied_average)) %>% 
+  mutate(NDC_Implied_conditional=as.numeric(NDC_Implied_conditional)) %>% 
+  mutate(NDC_Implied_unconditional=as.numeric(NDC_Implied_unconditional),
+         Total_trade = as.numeric(Total_trade),
+         Comparative_advantage = as.numeric(Comparative_advantage),
+         Trade_balance = as.numeric(Trade_balance)) %>% 
+ mutate(DisastersValues=as.numeric(DisastersValues))
+
+df_final_merged$N_ratio <- df_final_merged$N_CC / df_final_merged$N_econ
+df_final_merged$N_ratio[is.nan(df_final_merged$N_ratio)] <- NA
+  
+# Sélectionner les colonnes spécifiques (ajouter les variables de commerce si besoin)
+selected_data <- df_final_merged[,c("N_CC","N_ratio","PIBValues","RDValues","EducFValues","EducHValues","CO2emissionsalues","NDC_Implied_average","NDC_Implied_conditional","NDC_Implied_unconditional","is_carbon_tax","ExpendituresValues","DisastersValues","TemperatureValues", "Total_trade", "Comparative_advantage")]
+
+# Calculer la matrice de corrélation
+cor_matrix <- cor(selected_data, use = "pairwise.complete.obs")
+
+# Afficher la matrice de corrélation avec corrplot
+corrplot(cor_matrix, method = "number", tl.srt = 45, tl.cex = 0.8, number.cex = 0.8)
+
+# Les variables les plus corrélées avec le nombre d'articles sur le changement climatiue sont: le PIB, les émissions de CO2, les dépenses en recherche et développement et le nombre de désastres
+```
+
+```{r}
+corrplot(cor_matrix)
+```
+
+Analyse de corrélation PIB à l'échelle pays
+
+```{r}
+# Calcul des agrégats par pays
+df_aggreg_countries_PIB <- df_final_merged %>% 
+  group_by(country) %>% 
+  summarize(
+    N_CC_country = sum(N_CC, na.rm = TRUE),
+    N_eco_country = sum(N_econ, na.rm = TRUE),
+    N_ratio = N_CC_country/N_eco_country,
+    mean_PIB_country = mean(PIBValues, na.rm = TRUE)
+  )
+
+# Remplacer les NaN par NA dans tout le dataframe
+df_aggreg_countries_PIB <- df_aggreg_countries_PIB %>%
+  mutate(across(everything(), ~ ifelse(is.nan(.), NA, .)))
+
+ggplot(df_aggreg_countries_PIB, aes(x = log(mean_PIB_country), y = log(N_CC_country))) +
+  geom_point() +
+  geom_smooth(method = "lm", col = "blue") +
+  #geom_text(data = filter(df_aggreg_countries_PIB), aes(x=mean_PIB_country), y= N_CC_country, label=country, nudge_x =1, nudge_y=1)+
+  labs(title = "Correlation between number of climate change related articles and mean of PIB",
+       x = "Mean of PIB per country",
+       y = "Number of climate change related articles per country") +
+  theme_minimal()
+```
+
+Analyse de corrélation PIB à l'échelle agrégée
+
+```{r}
+#log?
+ggplot(df_final_merged, aes(x = PIBValues, y = N_CC)) +
+  geom_point(aes(color=country)) +
+  labs(title = "Correlation between number of climate change related articles and mean of PIB",
+       x = "Mean of PIB per country",
+       y = "Number of climate change related articles per country") +
+  theme_minimal()+
+  theme(legend.position = "none") +
+  ylim(0, 1000)
+```
+
+Graphique interractif
+
+```{r}
+#install.packages("ggiraph")
+library(ggiraph)
+plot_interractif <- ggplot(data = df_final_merged) +    geom_point_interactive(aes(x = PIBValues, y = N_CC,    tooltip = ISO3, data_id = ISO3))  +
+  theme(legend.position = "none")+ theme_minimal()
+girafe(ggobj=plot_interractif)
+```
+
+Analyse de corrélation PIB et ratio CC à l'échelle désagrégée
+
+```{r}
+ggplot(df_aggreg_countries_PIB, aes(x = log(mean_PIB_country), y = N_ratio)) +
+  geom_point() +
+  geom_smooth(method = "lm", col = "blue") +
+  #geom_text(data = filter(df_aggreg_countries_PIB), aes(x=mean_PIB_country), y= N_CC_country, label=country, nudge_x =1, nudge_y=1)+
+  labs(title = "Correlation between percentage of climate change related articles and mean of PIB",
+       x = "Mean of PIB per country",
+       y = "Percentage of climate change related articles per country") +
+  theme_minimal()
+
+##Plus de corrélation
+```
+
+Analyse de corrélation CO2
+
+```{r}
+# Calcul des agrégats par pays
+df_aggreg_countries_CO2 <- df_final_merged %>% 
+  group_by(country) %>% 
+  summarize(
+    N_CC_country = sum(N_CC, na.rm = TRUE),
+    N_eco_country = sum(N_econ, na.rm = TRUE),
+    N_ratio = N_CC_country/N_eco_country,
+    mean_CO2_country = mean(CO2emissionsalues, na.rm = TRUE)
+  )
+
+# Remplacer les NaN par NA dans tout le dataframe
+df_aggreg_countries_CO2 <- df_aggreg_countries_CO2 %>%
+  mutate(across(everything(), ~ ifelse(is.nan(.), NA, .)))
+
+ggplot(df_aggreg_countries_CO2, aes(x = log(mean_CO2_country), y = log(N_CC_country))) +
+  geom_point() +
+  geom_smooth(method = "lm", col = "blue") +
+  labs(title = "Correlation between number of climate change related articles and mean of CO2 emissions",
+       x = "Mean of CO2 emissions per country",
+       y = "Number of climate change related articles per country") +
+  theme_minimal()
+```
+
+Analyse de corrélation CO2 à l'échelle agrégée
+
+```{r}
+ggplot(df_final_merged, aes(x = log(CO2emissionsalues), y = log(N_CC))) +
+  geom_point(aes(color=country)) +
+  geom_smooth(method = "lm", col = "blue") +
+  labs(title = "Correlation between number of climate change related articles and mean of CO2 emissions",
+       x = "Mean of CO2 emissions per country",
+       y = "Number of climate change related articles per country") +
+  theme_minimal()+
+  theme(legend.position = "none")
+```
+
+Analyse de corrélation CO2 et ratio CC à l'échelle désagrégée
+
+```{r}
+ggplot(df_aggreg_countries_CO2, aes(x = log(mean_CO2_country), y = log(N_ratio))) +
+  geom_point() +
+  geom_smooth(method = "lm", col = "blue") +
+  labs(title = "Correlation between percentage of climate change related articles and mean of CO2 emissions",
+       x = "Mean of CO2 emissions per country",
+       y = "Percentage of climate change related articles per country") +
+  theme_minimal()
+
+
+##Corrélation négative
+
+#Same but animated
+```
+
+Analyse de corrélation R&D à l'échelle déségagrégée
+
+```{r}
+# Calcul des agrégats par pays
+df_aggreg_countries_RD <- df_final_merged %>% 
+  group_by(country) %>% 
+  summarize(
+    N_CC_country = sum(N_CC, na.rm = TRUE),
+    N_eco_country = sum(N_econ, na.rm = TRUE),
+    N_ratio = N_CC_country/N_eco_country,
+    mean_RD_country = mean(RDValues, na.rm = TRUE)
+  )
+
+# Remplacer les NaN par NA dans tout le dataframe
+df_aggreg_countries_RD <- df_aggreg_countries_RD %>%
+  mutate(across(everything(), ~ ifelse(is.nan(.), NA, .)))
+
+ggplot(df_aggreg_countries_RD, aes(x = mean_RD_country, y = N_CC_country)) +
+  geom_point() +
+  geom_smooth(method = "lm", col = "blue") +
+  labs(title = "Correlation between number of climate change related articles and mean of R&D expenditures (percent of GDP)",
+       x = "Mean of  R&D expenditures country (percent of GDP)",
+       y = "Number of climate change related articles per country") +
+  theme_minimal() +
+  ylim(0, 7500)
+
+## Same but animated
+
+```
+
+
+
+Analyse de corrélation R&D expenditures à l'échelle agrégée
+
+```{r}
+ggplot(df_final_merged, aes(x = RDValues, y = N_CC)) +
+  geom_point(aes(color=country)) +
+  geom_smooth(method = "lm", col = "blue") +
+  labs(title = "Correlation between number of climate change related articles and mean of R&D expenditures (percent of GDP)",
+       x = "Mean of R&D expenditures (percent of GDP)",
+       y = "Number of climate change related articles per country") +
+  theme_minimal()+
+  theme(legend.position = "none") +
+  ylim(0, 1000)
+```
+
+Analyse de corrélation RD et ratio CC à l'échelle désagrégée
+
+```{r}
+ggplot(df_aggreg_countries_RD, aes(x = mean_RD_country, y = N_ratio)) +
+  geom_point() +
+  geom_smooth(method = "lm", col = "blue") +
+  labs(title = "Correlation between percentage of climate change related articles and mean of R&D expenditures (percent of GDP)",
+       x = "Mean of R&D expenditures (percent of GDP)",
+       y = "Percentage of climate change related articles per country") +
+  theme_minimal()
+
+##Corrélation légèrement négative
+```
+
+Analyse de corrélation désastres à l'échelle déségagrégée
+
+```{r}
+# Calcul des agrégats par pays
+df_aggreg_countries_disasters <- df_final_merged %>% 
+  group_by(country) %>% 
+  summarize(
+    N_CC_country = sum(N_CC, na.rm = TRUE),
+    N_eco_country = sum(N_econ, na.rm = TRUE),
+    N_ratio = N_CC_country/N_eco_country,
+    mean_disasters_country = mean(DisastersValues, na.rm = TRUE)
+  )
+
+# Remplacer les NaN par NA dans tout le dataframe
+df_aggreg_countries_disasters <- df_aggreg_countries_disasters %>%
+  mutate(across(everything(), ~ ifelse(is.nan(.), NA, .)))
+
+ggplot(df_aggreg_countries_disasters, aes(x = mean_disasters_country, y = N_CC_country)) +
+  geom_point() +
+  geom_smooth(method = "lm", col = "blue") +
+  labs(title = "Correlation between number of climate change related articles and mean of the number of disasters per year",
+       x = "Mean of the number of disasters per year",
+       y = "Number of climate change related articles per country") +
+  theme_minimal() +
+  ylim(0, 7500)
+```
+
+Analyse de corrélation désastres expenditures à l'échelle agrégée
+
+```{r}
+ggplot(df_final_merged, aes(x = DisastersValues, y = N_CC)) +
+  geom_point(aes(color=country)) +
+  geom_smooth(method = "lm", col = "blue") +
+  labs(title = "Correlation between number of climate change related articles and mean of the number of disasters per year",
+       x = "Mean of the number of disasters per year",
+       y = "Number of climate change related articles per country") +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  ylim(0, 1000)
+```
+
+Analyse de corrélation désastres et ratio CC à l'échelle désagrégée
+
+```{r}
+ggplot(df_aggreg_countries_disasters, aes(x = mean_disasters_country, y = N_ratio)) +
+  geom_point() +
+  geom_smooth(method = "lm", col = "blue") +
+  labs(title = "Correlation between percentage of climate change related articles and mean of the number of disasters per year",
+       x = "Mean of the number of disasters per year",
+       y = "Percentage of climate change related articles per country") +
+  theme_minimal()
+
+##Faible corrélation
+```
+
+Revue de littérature
+
+Article : "The Global distribution of Authorship in Economics Journals"
+
+General idea = Global distribution of authorship in economic journals by country/region, by quality of journal, and by several fields of specialization
+
+Points of methodology:
+
+Measure of the regions : three possible regions for an author's affiliation = USA ; non-USA advanced economy ; developing economy. Authors are allocated to countries based on the location of their institutional affiliations.
+
+Results - Geographical concentration analysis :
+
+-   Comparison between low-income and high-income countries based on the location of the authors
+-   Regional distribution of authorship in top 10 journals: distribution highly skewed towards the rich regions of the world. This degree of concentration is difficult to explain by economic resources (distribution of the GDP across countries). Imbalance particularly striking for East and South Asia.
+-   Evolution of regional shares in GDP/frontier economic research over time: USA top 1 since a long time / Gains made by other advanced economies (non-USA advanced). / The problem of under-representation of developing countries in top research publications has been getting worse over time
+-   Trends in geographical concentration according to different categories of journal quality : The lower the quality raking of a journal, the higher non-USA representation / Non-USA advanced economies have generally made progress across all journal categories / Progress also for developing countries but mainly in the top 100 journal, of lower quality and least prestigious)
+
+### Analyse économétrique
+
+#### Analyse économétrique avec N_CC en variable dépendante
+
+```{r}
+library(lmtest)
+library(stargazer)
+library(broom)
+```
+
+```{r}
+df_final_merged <- df_final_merged %>%
+  mutate(PY = as.factor(PY),    # Effet fixe année
+         country = as.factor(country),  # Effet fixe journal
+         PIB_billion = PIBValues * 10^(-9)) 
+```
+
+```{r}
+model = list()
+```
+
+##### Modèle sans effet fixe et avec toutes les variables
+
+```{r}
+model1<- lm(N_CC ~ PIB_billion + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues + Comparative_advantage, data = df_final_merged) # modèle sans effet fixe
+
+stargazer(model1, 
+          type = "text")
+```
+
+Coefficients positifs et significatifs: Niveau d'éducation des hommes et efforts de réduction des émissions de gaz à effet de serre
+
+Coefficients négatifs et significatifs: les émissions de CO2 et le niveau des températures
+
+##### Modèle avec effet fixe pays et avec toutes les variables
+
+```{r}
+model2<- lm(N_CC ~ country + PIB_billion + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
+
+stargazer(model2, 
+          type = "text",
+          keep = c("PIB_billion", "RDValues", "EducFValues", "EducHValues", "CO2emissionsalues", "NDC_Implied_average", "is_carbon_tax", "ExpendituresValues", "DisastersValues", "TemperatureValues"))
+```
+
+Coefficients positifs et significatifs: Le fait d'avoir une taxe carbone, la fréquence des désastres, les dépenses en recherche et développement
+
+Coefficients négatifs et significatifs: les émissions de CO2 = modèle sans effet fixe
+
+##### Modèle avec effet fixe pays et années et avec toutes les variables
+
+```{r}
+model3<- lm(N_CC ~ country + PY + PIB_billion + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
+
+stargazer(model3, 
+          type = "text",
+          keep = c("PIB_billion", "RDValues", "EducFValues", "EducHValues", "CO2emissionsalues", "NDC_Implied_average", "is_carbon_tax", "ExpendituresValues", "DisastersValues", "TemperatureValues"))
+```
+
+Coefficients positifs et significatifs: Les dépenses de protection de l'environnement
+
+Coefficients négatifs et significatifs: les émissions de CO2 = modèle sans effet fixe et modèle avec seulement les années en effet fixe
+
+##### Modèle avec effet fixe pays et années et avec seulement les variables non liées au changement climatique
+
+```{r}
+model4<- lm(N_CC ~ country + PY + PIBValues + RDValues + EducFValues + EducHValues, data = df_final_merged) 
+stargazer(model4, 
+          type = "text")
+```
+
+Aucune variable significative
+
+##### Modèle avec effet fixe pays et années et avec seulement les variables liées au changement climatique
+
+```{r}
+model5<- lm(N_CC ~ country + PY + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
+stargazer(model5, 
+          type = "text")
+```
+
+Coefficients positifs et significatifs: Le fait d'avoir une taxe carbone
+
+Coefficients négatifs et significatifs: les émissions de CO2, la hausse des températures
+
+#### Analyse économétrique avec N_ratio en variable dépendante
+
+##### Modèle sans effet fixe et avec toutes les variables
+
+```{r}
+model1<- lm(N_ratio ~ PIB_billion + RDValues + EducFValues + EducHValues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) # modèle sans effet fixe
+# vif(mod = model1)vif(mod = model3)
+stargazer(model1, 
+          type = "text",
+          keep = c("PIB_billion", "RDValues", "EducFValues", "EducHValues", "CO2emissionsalues", "NDC_Implied_average", "is_carbon_tax", "ExpendituresValues", "DisastersValues", "TemperatureValues"))
+```
+
+Coefficients positifs et significatifs: Les efforts de lutte contre le CC (ambissions réductions GES), Les dépenses en recherche et développement et les dépenses de protection de l'environnement
+
+Coefficients négatifs et significatifs: la hausse des températures
+
+##### Modèle avec effet fixe pays et avec toutes les variables
+
+```{r}
+model2<- lm(N_ratio ~ country + PIB_billion + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
+
+stargazer(model2, 
+          type = "text",
+          keep = c("PIB_billion", "RDValues", "EducFValues", "EducHValues", "CO2emissionsalues", "NDC_Implied_average", "is_carbon_tax", "ExpendituresValues", "DisastersValues", "TemperatureValues"))
+```
+
+Coefficients positifs et significatifs: Les dépenses en recherche et développement, le niveau d'éducation des femmes, le fait d'avoir une taxe carbone les dépenses de protection de l'environnement
+
+Coefficients négatifs et significatifs: le niveau d'éducation des hommes
+
+##### Modèle avec effet fixe pays et années et avec toutes les variables
+
+```{r}
+model3<- lm(N_ratio ~ country + PY + PIB_billion + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
+library(car)
+
+
+stargazer(model3, 
+          type = "text",
+          keep = c("PIB_billion", "RDValues", "EducFValues", "EducHValues", "CO2emissionsalues", "NDC_Implied_average", "is_carbon_tax", "ExpendituresValues", "DisastersValues", "TemperatureValues"))
+```
+
+Coefficients positifs et significatifs: Le niveau d'éduction des femmes et les dépenses de protection de l'environnement
+
+Coefficients négatifs et significatifs: le niveau d'éducation des hommes
+
+##### Modèle avec effet fixe pays et années et avec seulement les variables non liées au changement climatique
+
+```{r}
+model4 <- lm(N_ratio ~ country + PY + PIBValues + RDValues + EducFValues + EducHValues, data = df_final_merged) 
+stargazer(model4, 
+          type = "text")
+```
+
+Aucune variable significative
+
+##### Modèle avec effet fixe pays et années et avec seulement les variables liées au changement climatique
+
+```{r}
+model5 <- lm(N_ratio ~ country + PY + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
+stargazer(model5, 
+          type = "text")
+```
+
+Coefficients positifs et significatifs: Le fait d'avoir une taxe carbone
+
+#### Comparaison des modèles économétriques
+
+##### Comparaison des modèles économétriques avec N_CC la variable dépendante
+
+Globalement, les émissions de CO2 ont un impact négatif et significatif dans tous les modèles, ce qui signifie que les pays qui émettent le plus sont aussi les pays qui publient le moins d'articles sur le changement climatique.
+
+##### Comparaison des modèles économétriques avec N_ratio la variable dépendante
+
+Les dépenses en recherche et développement, le fait d'avoir une taxe carbone etl es dépenses de protection de l'environnement sont des variables positives et significatives dans pratiquement tous les modèles.
+
+##### Comparaison des modèles économétriques selon la variable dépendante
+
+Dans les deux cas, lorsque l'on fait la régression sans effet fixe et avec toutes les variables, **l'effort de réduction des émissions de GES** a toujours un impact positif et significatif sur le nombre d'articles écrits qui portent sur le changement climatique ou sur son ratio. De même, **la hausse des températures** a toujours un effet négatif et significatif.
+
+Dans les deux cas, lorsque l'on fait la régression avec effet fixe pays et avec toutes les variables, le fait d'avoir une **taxe carbone** et le **niveau des dépenses de protection de l'environnement** ont toujours un impact positif et significatif sur le nombre d'articles écrits qui portent sur le changement climatique ou sur son ratio.
+
+Dans les deux cas, lorsque l'on fait la régression avec effet fixe pays et années et avec toutes les variables, **le niveau des dépenses de protection de l'environnement** a toujours un impact positif et significatif sur le nombre d'articles écrits qui portent sur le changement climatique ou sur son ratio.
+
+Dans les deux cas, lorsque l'on fait une régression seulement avec les variables qui n'ont aucun lien avec le changement climatique, aucune de ces variables n'est significative.
+
+Dans les deux cas, lorsque l'on fait une régression seulement avec les variables qui ont un lien avec le changement climatique, **le fait d'avoir une taxe carbone** a toujours un impact positif et significatif sur le nombre d'articles écrits qui portent sur le changement climatique ou sur son ratio.
+
+Globalement, les dépenses de protection de l'environnement et le fait d'avoir une taxe carbone sont des variables qui ont souvent un coefficient positif et significatif.
+
+```{r}
+
+# ### Faire une carte
+# # Ajout de la colonne geometry : Créer un shapefile (une data frame géospatialisée)
+# # Install and load necessary packages
+# 
+# install.packages("sf")
+# install.packages("rnaturalearth")
+# install.packages("rnaturalearthdata")
+#  
+# library(sf)
+# library(rnaturalearth)
+# library(rnaturalearthdata)
+#  
+# # Get the world country polygons
+# world <- ne_countries(scale = "medium", returnclass = "sf") %>% 
+#   mutate(ISO3 = iso_a3_eh)
+# 
+# str(world)
+# # Add ISO3 variable to merge world and aggreg df country (not needed if already iso3)
+# temp <- countries::country_reference_list
+# association_table <- temp %>%
+#   select(Name0, ISO3, simple) %>% 
+#   mutate(Country.Code = ISO3) %>% 
+#   select(ISO3,Name0) %>% 
+#   rename(country=Name0)
+#  
+# df_aggreg_countries_ISO3 <- df_aggreg_countries %>% 
+#   left_join(association_table,by="country")
+#  
+# # Merge the data frame with the geometries
+# sf_aggreg_countries_ISO3 <- df_aggreg_countries_ISO3 %>% 
+#   left_join(world, by = "ISO3") %>% 
+#   st_as_sf()
+#  
+# ggplot(sf_aggreg_countries_ISO3) +
+#   geom_sf(aes(fill=N_CC_country))
+```
+
