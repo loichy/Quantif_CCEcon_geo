@@ -80,7 +80,7 @@ corrplot(cor_matrix, method = "number", tl.srt = 45, tl.cex = 0.8, number.cex = 
 corrplot(cor_matrix)
 ```
 
-Analyse de corrélation PIB à l'échelle désagrégée
+Analyse de corrélation PIB à l'échelle pays
 
 ```{r}
 # Calcul des agrégats par pays
@@ -97,16 +97,14 @@ df_aggreg_countries_PIB <- df_final_merged %>%
 df_aggreg_countries_PIB <- df_aggreg_countries_PIB %>%
   mutate(across(everything(), ~ ifelse(is.nan(.), NA, .)))
 
-#log?
-ggplot(df_aggreg_countries_PIB, aes(x = mean_PIB_country, y = N_CC_country)) +
+ggplot(df_aggreg_countries_PIB, aes(x = log(mean_PIB_country), y = log(N_CC_country))) +
   geom_point() +
   geom_smooth(method = "lm", col = "blue") +
   #geom_text(data = filter(df_aggreg_countries_PIB), aes(x=mean_PIB_country), y= N_CC_country, label=country, nudge_x =1, nudge_y=1)+
   labs(title = "Correlation between number of climate change related articles and mean of PIB",
        x = "Mean of PIB per country",
        y = "Number of climate change related articles per country") +
-  theme_minimal() +
-  ylim(0, 7500)
+  theme_minimal()
 ```
 
 Analyse de corrélation PIB à l'échelle agrégée
@@ -115,7 +113,6 @@ Analyse de corrélation PIB à l'échelle agrégée
 #log?
 ggplot(df_final_merged, aes(x = PIBValues, y = N_CC)) +
   geom_point(aes(color=country)) +
-  geom_smooth(method = "lm", col = "blue") +
   labs(title = "Correlation between number of climate change related articles and mean of PIB",
        x = "Mean of PIB per country",
        y = "Number of climate change related articles per country") +
@@ -124,18 +121,27 @@ ggplot(df_final_merged, aes(x = PIBValues, y = N_CC)) +
   ylim(0, 1000)
 ```
 
+Graphique interractif
+
+```{r}
+#install.packages("ggiraph")
+library(ggiraph)
+plot_interractif <- ggplot(data = df_final_merged) +    geom_point_interactive(aes(x = PIBValues, y = N_CC,    tooltip = ISO3, data_id = ISO3))  +
+  theme(legend.position = "none")+ theme_minimal()
+girafe(ggobj=plot_interractif)
+```
+
 Analyse de corrélation PIB et ratio CC à l'échelle désagrégée
 
 ```{r}
-ggplot(df_aggreg_countries_PIB, aes(x = log(mean_PIB_country), y = log(N_ratio))) +
+ggplot(df_aggreg_countries_PIB, aes(x = log(mean_PIB_country), y = N_ratio)) +
   geom_point() +
   geom_smooth(method = "lm", col = "blue") +
   #geom_text(data = filter(df_aggreg_countries_PIB), aes(x=mean_PIB_country), y= N_CC_country, label=country, nudge_x =1, nudge_y=1)+
   labs(title = "Correlation between percentage of climate change related articles and mean of PIB",
        x = "Mean of PIB per country",
        y = "Percentage of climate change related articles per country") +
-  theme_minimal() +
-  ylim(0, 7500)
+  theme_minimal()
 
 ##Plus de corrélation
 ```
@@ -489,40 +495,40 @@ Globalement, les dépenses de protection de l'environnement et le fait d'avoir u
 
 ```{r}
 
-### Faire une carte
-# Ajout de la colonne geometry : Créer un shapefile (une data frame géospatialisée)
-# Install and load necessary packages
-
-install.packages("sf")
-install.packages("rnaturalearth")
-install.packages("rnaturalearthdata")
- 
-library(sf)
-library(rnaturalearth)
-library(rnaturalearthdata)
- 
-# Get the world country polygons
-world <- ne_countries(scale = "medium", returnclass = "sf") %>% 
-  mutate(ISO3 = iso_a3_eh)
-
-str(world)
-# Add ISO3 variable to merge world and aggreg df country (not needed if already iso3)
-temp <- countries::country_reference_list
-association_table <- temp %>%
-  select(Name0, ISO3, simple) %>% 
-  mutate(Country.Code = ISO3) %>% 
-  select(ISO3,Name0) %>% 
-  rename(country=Name0)
- 
-df_aggreg_countries_ISO3 <- df_aggreg_countries %>% 
-  left_join(association_table,by="country")
- 
-# Merge the data frame with the geometries
-sf_aggreg_countries_ISO3 <- df_aggreg_countries_ISO3 %>% 
-  left_join(world, by = "ISO3") %>% 
-  st_as_sf()
- 
-ggplot(sf_aggreg_countries_ISO3) +
-  geom_sf(aes(fill=N_CC_country))
+# ### Faire une carte
+# # Ajout de la colonne geometry : Créer un shapefile (une data frame géospatialisée)
+# # Install and load necessary packages
+# 
+# install.packages("sf")
+# install.packages("rnaturalearth")
+# install.packages("rnaturalearthdata")
+#  
+# library(sf)
+# library(rnaturalearth)
+# library(rnaturalearthdata)
+#  
+# # Get the world country polygons
+# world <- ne_countries(scale = "medium", returnclass = "sf") %>% 
+#   mutate(ISO3 = iso_a3_eh)
+# 
+# str(world)
+# # Add ISO3 variable to merge world and aggreg df country (not needed if already iso3)
+# temp <- countries::country_reference_list
+# association_table <- temp %>%
+#   select(Name0, ISO3, simple) %>% 
+#   mutate(Country.Code = ISO3) %>% 
+#   select(ISO3,Name0) %>% 
+#   rename(country=Name0)
+#  
+# df_aggreg_countries_ISO3 <- df_aggreg_countries %>% 
+#   left_join(association_table,by="country")
+#  
+# # Merge the data frame with the geometries
+# sf_aggreg_countries_ISO3 <- df_aggreg_countries_ISO3 %>% 
+#   left_join(world, by = "ISO3") %>% 
+#   st_as_sf()
+#  
+# ggplot(sf_aggreg_countries_ISO3) +
+#   geom_sf(aes(fill=N_CC_country))
 ```
 
