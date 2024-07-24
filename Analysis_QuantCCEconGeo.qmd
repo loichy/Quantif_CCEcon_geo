@@ -369,7 +369,7 @@ Coefficients négatifs et significatifs: les émissions de CO2 et le niveau des 
 ##### Modèle avec effet fixe pays et avec toutes les variables
 
 ```{r}
-model2<- lm(N_CC ~ country + PIB_billion + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
+model2<- lm(N_CC ~ country + PIB_billion + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues + Comparative_advantage, data = df_final_merged) 
 
 stargazer(model2, 
           type = "text",
@@ -384,7 +384,7 @@ Coefficients négatifs et significatifs: les émissions de CO2 = modèle sans ef
 ##### Modèle avec effet fixe pays et années et avec toutes les variables
 
 ```{r}
-model3<- lm(N_CC ~ country + PY + PIB_billion + RDValues + EducFValues + EducHValues + CO2_mega + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
+model3<- lm(N_CC ~ country + PY + PIB_billion + RDValues + EducFValues + EducHValues + CO2_mega + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues + Comparative_advantage, data = df_final_merged) 
 
 stargazer(model3, 
           type = "text",
@@ -408,7 +408,7 @@ Aucune variable significative
 ##### Modèle avec effet fixe pays et années et avec seulement les variables liées au changement climatique
 
 ```{r}
-model5<- lm(N_CC ~ country + PY + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
+model5<- lm(N_CC ~ country + PY + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues + Comparative_advantage, data = df_final_merged) 
 stargazer(model5, 
           type = "text")
 ```
@@ -422,7 +422,7 @@ Coefficients négatifs et significatifs: les émissions de CO2, la hausse des te
 ##### Modèle sans effet fixe et avec toutes les variables
 
 ```{r}
-model1<- lm(N_ratio ~ PIB_billion + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) # modèle sans effet fixe
+model1<- lm(N_ratio ~ PIB_billion + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues + Comparative_advantage, data = df_final_merged) # modèle sans effet fixe
 vif(mod=model1)
 stargazer(model1, 
           type = "text",
@@ -436,7 +436,7 @@ Coefficients négatifs et significatifs: la hausse des températures
 ##### Modèle avec effet fixe pays et avec toutes les variables
 
 ```{r}
-model2<- lm(N_ratio ~ country + PIB_billion + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
+model2<- lm(N_ratio ~ country + PIB_billion + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues + Comparative_advantage, data = df_final_merged) 
 
 stargazer(model2, 
           type = "text",
@@ -450,7 +450,7 @@ Coefficients négatifs et significatifs: le niveau d'éducation des hommes
 ##### Modèle avec effet fixe pays et années et avec toutes les variables
 
 ```{r}
-model3<- lm(N_ratio ~ country + PY + PIBValues + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
+model3<- lm(N_ratio ~ country + PY + PIBValues + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues + Comparative_advantage, data = df_final_merged) 
 
 stargazer(model3, 
           type = "text",
@@ -474,7 +474,7 @@ Aucune variable significative
 ##### Modèle avec effet fixe pays et années et avec seulement les variables liées au changement climatique
 
 ```{r}
-model5 <- lm(N_ratio ~ country + PY + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
+model5 <- lm(N_ratio ~ country + PY + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues + Comparative_advantage, data = df_final_merged) 
 stargazer(model5, 
           type = "text")
 ```
