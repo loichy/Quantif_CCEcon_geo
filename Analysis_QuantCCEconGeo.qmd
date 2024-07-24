@@ -59,13 +59,16 @@ df_final_merged <- df_final_merged %>%
   mutate(NDC_Implied_average=as.numeric(NDC_Implied_average)) %>% 
   mutate(NDC_Implied_conditional=as.numeric(NDC_Implied_conditional)) %>% 
   mutate(NDC_Implied_unconditional=as.numeric(NDC_Implied_unconditional)) %>% 
- mutate(DisastersValues=as.numeric(DisastersValues))
+ mutate(DisastersValues=as.numeric(DisastersValues))%>% 
+ mutate(Total_trade=as.numeric(Total_trade))%>% 
+ mutate(Comparative_advantage=as.numeric(Comparative_advantage))%>% 
+ mutate(Trade_balance=as.numeric(Trade_balance))
 
 df_final_merged$N_ratio <- df_final_merged$N_CC / df_final_merged$N_econ
 df_final_merged$N_ratio[is.nan(df_final_merged$N_ratio)] <- NA
   
 # Sélectionner les colonnes spécifiques (ajouter les variables de commerce si besoin)
-selected_data <- df_final_merged[,c("N_CC","N_ratio","PIBValues","RDValues","EducFValues","EducHValues","CO2emissionsalues","NDC_Implied_average","NDC_Implied_conditional","NDC_Implied_unconditional","is_carbon_tax","ExpendituresValues","DisastersValues","TemperatureValues")]
+selected_data <- df_final_merged[,c("N_CC","N_ratio","PIBValues","RDValues","EducFValues","EducHValues","CO2emissionsalues","NDC_Implied_average","NDC_Implied_conditional","NDC_Implied_unconditional","is_carbon_tax","ExpendituresValues","DisastersValues","TemperatureValues","Total_trade")]
 
 # Calculer la matrice de corrélation
 cor_matrix <- cor(selected_data, use = "pairwise.complete.obs")
@@ -340,7 +343,9 @@ library(broom)
 ```{r}
 df_final_merged <- df_final_merged %>%
   mutate(PY = as.factor(PY),    # Effet fixe année
-         country = as.factor(country))  # Effet fixe journal
+         country = as.factor(country),
+         PIB_billion=PIBValues*10^(-9),
+         CO2_mega=CO2emissionsalues/1000)  # Effet fixe journal
 ```
 
 ```{r}
@@ -350,10 +355,11 @@ model = list()
 ##### Modèle sans effet fixe et avec toutes les variables
 
 ```{r}
-model1<- lm(N_CC ~ PIBValues + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) # modèle sans effet fixe
+model1<- lm(N_CC ~ PIB_billion + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues + Comparative_advantage, data = df_final_merged) # modèle sans effet fixe
 
 stargazer(model1, 
-          type = "text")
+          type = "text",
+          keep=c("PIB_billion","RDValues","EducFValues","EducHValues","CO2emissionsalues","NDC_Implied_average", "is_carbon_tax","ExpendituresValues","DisastersValues","TemperatureValues","Comparative_advantage"))
 ```
 
 Coefficients positifs et significatifs: Niveau d'éducation des hommes et efforts de réduction des émissions de gaz à effet de serre
@@ -363,26 +369,29 @@ Coefficients négatifs et significatifs: les émissions de CO2 et le niveau des 
 ##### Modèle avec effet fixe pays et avec toutes les variables
 
 ```{r}
-model2<- lm(N_CC ~ country + PIBValues + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
+model2<- lm(N_CC ~ country + PIB_billion + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
 
 stargazer(model2, 
-          type = "text")
+          type = "text",
+          keep=c("PIB_billion","RDValues","EducFValues","EducHValues","CO2emissionsalues","NDC_Implied_average", "is_carbon_tax","ExpendituresValues","DisastersValues","TemperatureValues","Comparative_advantage"))
 ```
 
-Coefficients positifs et significatifs: Le fait d'avoir une taxe carbone, la fréquence des désastres, les dépenses en recherche et développement
+Le niveu de développement n'est plus significtif, ce qui joue maintenant sont les dépenses en recherche et développement
+Coefficients positifs et significatifs: Le fait d'avoir une taxe carbone, la fréquence des désastres, les dépenses en recherche et développement.
 
 Coefficients négatifs et significatifs: les émissions de CO2 = modèle sans effet fixe
 
 ##### Modèle avec effet fixe pays et années et avec toutes les variables
 
 ```{r}
-model3<- lm(N_CC ~ country + PY + PIBValues + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
+model3<- lm(N_CC ~ country + PY + PIB_billion + RDValues + EducFValues + EducHValues + CO2_mega + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
 
 stargazer(model3, 
-          type = "text")
+          type = "text",
+          keep=c("PIB_billion","RDValues","EducFValues","EducHValues","CO2_mega","NDC_Implied_average", "is_carbon_tax","ExpendituresValues","DisastersValues","TemperatureValues","Comparative_advantage"))
 ```
 
-Coefficients positifs et significatifs: Les dépenses de protection de l'environnement
+Coefficients positifs et significatifs: Les dépenses de protection de l'environnement 
 
 Coefficients négatifs et significatifs: les émissions de CO2 = modèle sans effet fixe et modèle avec seulement les années en effet fixe
 
@@ -413,10 +422,11 @@ Coefficients négatifs et significatifs: les émissions de CO2, la hausse des te
 ##### Modèle sans effet fixe et avec toutes les variables
 
 ```{r}
-model1<- lm(N_ratio ~ PIBValues + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) # modèle sans effet fixe
-
+model1<- lm(N_ratio ~ PIB_billion + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) # modèle sans effet fixe
+vif(mod=model1)
 stargazer(model1, 
-          type = "text")
+          type = "text",
+          keep=c("PIB_billion","RDValues","EducFValues","EducHValues","CO2emissionsalues","NDC_Implied_average", "is_carbon_tax","ExpendituresValues","DisastersValues","TemperatureValues","Comparative_advantage"))
 ```
 
 Coefficients positifs et significatifs: Les efforts de lutte contre le CC (ambissions réductions GES), Les dépenses en recherche et développement et les dépenses de protection de l'environnement
@@ -426,10 +436,11 @@ Coefficients négatifs et significatifs: la hausse des températures
 ##### Modèle avec effet fixe pays et avec toutes les variables
 
 ```{r}
-model2<- lm(N_ratio ~ country + PIBValues + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
+model2<- lm(N_ratio ~ country + PIB_billion + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
 
 stargazer(model2, 
-          type = "text")
+          type = "text",
+          keep=c("PIB_billion","RDValues","EducFValues","EducHValues","CO2emissionsalues","NDC_Implied_average", "is_carbon_tax","ExpendituresValues","DisastersValues","TemperatureValues","Comparative_advantage"))
 ```
 
 Coefficients positifs et significatifs: Les dépenses en recherche et développement, le niveau d'éducation des femmes, le fait d'avoir une taxe carbone les dépenses de protection de l'environnement
@@ -442,7 +453,8 @@ Coefficients négatifs et significatifs: le niveau d'éducation des hommes
 model3<- lm(N_ratio ~ country + PY + PIBValues + RDValues + EducFValues + EducHValues + CO2emissionsalues + NDC_Implied_average + is_carbon_tax + ExpendituresValues + DisastersValues + TemperatureValues, data = df_final_merged) 
 
 stargazer(model3, 
-          type = "text")
+          type = "text",
+          keep=c("PIB_billion","RDValues","EducFValues","EducHValues","CO2emissionsalues","NDC_Implied_average", "is_carbon_tax","ExpendituresValues","DisastersValues","TemperatureValues","Comparative_advantage"))
 ```
 
 Coefficients positifs et significatifs: Le niveau d'éduction des femmes et les dépenses de protection de l'environnement
